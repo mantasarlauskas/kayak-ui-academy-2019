@@ -7,8 +7,10 @@ const ListForm = ({ history, submitForm, list, id }) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setName(list.name);
-    setDescription(list.description);
+    if (list) {
+      setName(list.name);
+      setDescription(list.description);
+    }
   }, [list]);
 
   const validateForm = () => {
