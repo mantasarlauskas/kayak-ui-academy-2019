@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root';
-
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import HeaderWrapper from '../header-wrapper';
 import MovieCardWrapper from '../movie-card-wrapper';
@@ -13,43 +13,34 @@ import Footer from '../footer';
 import styles from './app.scss';
 import '../../client/movies/index.scss';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedMovie: null
-    };
-  }
+const App = ({ selectedMovie, setMovie }) => (
+  <div className={styles.container}>
+    <HeaderWrapper>
+      <Autocomplete handleSelect={setMovie} />
+    </HeaderWrapper>
+    <div className="page-content container">
+      <MovieCardWrapper>
+        {selectedMovie ? (
+          <MovieCard selectedMovie={selectedMovie} />
+        ) : (
+          <div className="mb-30">
+            <h3>Selected Movie</h3>
+          </div>
+        )}
+      </MovieCardWrapper>
+      <FavouriteMovies />
+    </div>
+    <Footer />
+  </div>
+);
 
-  handleSelect = movie => {
-    this.setState({
-      selectedMovie: movie
-    });
-  };
+App.propTypes = {
+  setMovie: PropTypes.func.isRequired,
+  selectedMovie: PropTypes.object
+};
 
-  render() {
-    const { selectedMovie } = this.state;
-    return (
-      <div className={styles.container}>
-        <HeaderWrapper>
-          <Autocomplete handleSelect={this.handleSelect} />
-        </HeaderWrapper>
-        <div className="page-content container">
-          <MovieCardWrapper>
-            {selectedMovie ? (
-              <MovieCard selectedMovie={selectedMovie} />
-            ) : (
-              <div className="mb-30">
-                <h3>Selected Movie</h3>
-              </div>
-            )}
-          </MovieCardWrapper>
-          <FavouriteMovies />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-}
+App.defaultProps = {
+  selectedMovie: null
+};
 
 export default hot(App);

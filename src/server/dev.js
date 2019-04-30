@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
   const fs = res.locals.fs;
   const outputPath = res.locals.webpackStats.toJson().outputPath;
@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     <div id="root"></div>
 		${normalizeAssets(assetsByChunkName.main)
       .filter(path => path.endsWith('.js'))
-      .map(path => `<script src="${path}"></script>`)
+      .map(path => `<script src="/${path}"></script>`)
       .join('\n')}
   </body>
 </html>

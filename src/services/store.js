@@ -1,8 +1,8 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
+import logger from 'redux-logger';
 import reducer from '../reducers';
-import logger from '../middlewares/logger';
 
 import initStorageClient from './local-storage-client';
 
