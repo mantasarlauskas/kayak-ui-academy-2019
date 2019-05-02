@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import HeaderWrapper from '../header-wrapper';
 import Autocomplete from '../autocomplete';
 import Footer from '../footer';
@@ -13,15 +13,22 @@ import List from '../list';
 import styles from './app.scss';
 import '../../client/movies/index.scss';
 
-const App = ({ setMovie, setLists }) => {
+const App = ({ setMovie, setLists, history, location }) => {
   useEffect(() => {
     setLists();
   }, []);
 
+  const handleSelect = movie => {
+    setMovie(movie);
+    if (location.pathname !== '/') {
+      history.push('/');
+    }
+  };
+
   return (
     <div className={styles.container}>
       <HeaderWrapper>
-        <Autocomplete handleSelect={setMovie} />
+        <Autocomplete handleSelect={handleSelect} />
       </HeaderWrapper>
       <Switch>
         <Route path="/" exact component={Main} />
@@ -37,7 +44,13 @@ const App = ({ setMovie, setLists }) => {
 
 App.propTypes = {
   setMovie: PropTypes.func.isRequired,
-  setLists: PropTypes.func.isRequired
+  setLists: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
-export default hot(App);
+export default withRouter(hot(App));

@@ -1,4 +1,9 @@
-import { getLists as fetchLists, createList, updateList } from '../services/movieDB';
+import {
+  getLists as fetchLists,
+  createList,
+  updateList,
+  addMovieToList
+} from '../services/movieDB';
 
 export const GET_LISTS = 'GET_LISTS';
 export const GOT_LISTS = 'GOT_LISTS';
@@ -11,6 +16,11 @@ const gotLists = lists => ({
   type: GOT_LISTS,
   lists
 });
+
+export const addMovie = (id, movieId) => async dispatch => {
+  await addMovieToList(id, movieId);
+  dispatch(setLists());
+};
 
 export const setLists = () => async dispatch => {
   dispatch(getLists());

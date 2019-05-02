@@ -58,6 +58,13 @@ export const getList = async id => {
   return results;
 };
 
+export const addMovieToList = async (id, movieId) =>
+  axios.post(
+    `${url}/list/${id}/items`,
+    { items: [{ media_type: 'movie', media_id: movieId }] },
+    config
+  );
+
 export const createList = async data =>
   axios.post(`${url}/list`, { ...data, iso_639_1: 'en' }, config);
 
