@@ -1,46 +1,43 @@
+import React, { useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import PropTypes from 'prop-types';
-import React from 'react';
-
+import { Switch, Route } from 'react-router-dom';
 import HeaderWrapper from '../header-wrapper';
-import MovieCardWrapper from '../movie-card-wrapper';
-
 import Autocomplete from '../autocomplete';
-import MovieCard from '../movie-card';
-import FavouriteMovies from '../favorite-movies';
 import Footer from '../footer';
-
+import Main from '../main';
+import Lists from '../lists';
+import AddListForm from '../add-list-form';
+import EditListForm from '../edit-list-form';
+import List from '../list';
 import styles from './app.scss';
 import '../../client/movies/index.scss';
 
-const App = ({ selectedMovie, setMovie }) => (
-  <div className={styles.container}>
-    <HeaderWrapper>
-      <Autocomplete handleSelect={setMovie} />
-    </HeaderWrapper>
-    <div className="page-content container">
-      <MovieCardWrapper>
-        {selectedMovie ? (
-          <MovieCard selectedMovie={selectedMovie} />
-        ) : (
-          <div className="mb-30">
-            <h3>Selected Movie</h3>
-          </div>
-        )}
-      </MovieCardWrapper>
-      <FavouriteMovies />
+const App = ({ setMovie, setLists }) => {
+  useEffect(() => {
+    setLists();
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <HeaderWrapper>
+        <Autocomplete handleSelect={setMovie} />
+      </HeaderWrapper>
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/lists" component={Lists} />
+        <Route path="/add-list" component={AddListForm} />
+        <Route path="/edit-list/:id" component={EditListForm} />
+        <Route path="/list/:id" component={List} />
+      </Switch>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-);
+  );
+};
 
 App.propTypes = {
   setMovie: PropTypes.func.isRequired,
-  selectedMovie: PropTypes.object
-};
-
-App.defaultProps = {
-  selectedMovie: null
+  setLists: PropTypes.func.isRequired
 };
 
 export default hot(App);

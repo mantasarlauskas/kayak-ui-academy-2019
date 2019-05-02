@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import WithClickOutside from '../with-click-outside';
@@ -10,7 +11,8 @@ const Autocomplete = ({
   clearMovies,
   genres,
   handleSelect,
-  setGenres
+  setGenres,
+  history
 }) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -86,7 +88,10 @@ Autocomplete.propTypes = {
   setGenres: PropTypes.func.isRequired,
   setMovies: PropTypes.func.isRequired,
   clearMovies: PropTypes.func.isRequired,
-  isMoviesLoading: PropTypes.bool.isRequired
+  isMoviesLoading: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
-export default Autocomplete;
+export default withRouter(Autocomplete);

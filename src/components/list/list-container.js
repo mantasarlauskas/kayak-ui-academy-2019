@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { editList } from '../../actions/lists';
-import ListForm from '../list-form';
+import { setCurrentList } from '../../actions/currentList';
+import List from './list';
 
 const mapStateToProps = (
-  { lists },
+  { lists, currentList },
   {
     match: {
       params: { id }
@@ -11,14 +11,15 @@ const mapStateToProps = (
   }
 ) => ({
   lists,
+  currentList,
   id: parseInt(id, 10)
 });
 
 const mapDispatchToProps = {
-  submitForm: editList
+  setCurrentList
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListForm);
+)(List);

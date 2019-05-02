@@ -11,6 +11,7 @@ const config = {
   }
 };
 const moviesMemo = {};
+export const imagePath = 'https://image.tmdb.org/t/p/w500';
 
 export const getMovies = query => {
   if (moviesMemo[query]) {
@@ -47,6 +48,13 @@ export const getLists = async () => {
   const {
     data: { results }
   } = await axios.get(`${url}/account/${accountID}/lists`, config);
+  return results;
+};
+
+export const getList = async id => {
+  const {
+    data: { results }
+  } = await axios.get(`${url}/list/${id}`, config);
   return results;
 };
 

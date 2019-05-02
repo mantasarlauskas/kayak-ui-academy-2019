@@ -39,7 +39,5 @@ export const setMovies = () => (dispatch, getState, { storageClient }) => {
     (storageClient.get(FAVORITE_MOVIES_KEY) && storageClient.get(FAVORITE_MOVIES_KEY).split(',')) ||
     [];
 
-  return getMoviesList(ids).then(movies => {
-    return dispatch(setMoviesAction(movies));
-  });
+  return getMoviesList(ids).then(movies => dispatch(setMoviesAction(movies)));
 };

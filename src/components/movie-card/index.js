@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { imagePath } from '../../services/movieDB';
 import { toggleFavorite as toggleFavoriteAction } from '../../actions/favorites';
-
-const imagePath = 'https://image.tmdb.org/t/p/w500';
 
 const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite }) => (
   <div>

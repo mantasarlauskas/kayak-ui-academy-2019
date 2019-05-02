@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Spinner from '../spinner';
 
-const ListForm = ({ history, submitForm, list, id }) => {
+const ListForm = ({ history, submitForm, lists, id }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (list) {
-      setName(list.name);
-      setDescription(list.description);
+    if (lists && lists.array.length > 0) {
+      const list = lists.array.find(({ id: listId }) => listId === parseInt(id, 10));
+      if (list) {
+        setName(list.name);
+        setDescription(list.description);
+      }
     }
-  }, [list]);
+  }, [lists]);
 
   const validateForm = () => {
     if (name === '' || description === '') {
@@ -42,7 +46,11 @@ const ListForm = ({ history, submitForm, list, id }) => {
     }
   };
 
-  return (
+  return lists && lists.isLoading ? (
+    <Spinner />
+  ) : lists && (!name && !description) ? (
+    <div>tokio jusu listo nera</div>
+  ) : (
     <form onSubmit={handleSubmit}>
       {error && <div>laukeliu tusciu negali buti!!</div>}
       <input type="text" name="name" value={name} onChange={handleChange} />
@@ -57,16 +65,22 @@ ListForm.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  list: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+  lists: PropTypes.shape({
+    array: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired
+      })
+    ),
+    isLoading: PropTypes.bool.isRequired
   }),
   id: PropTypes.number
 };
 
 ListForm.defaultProps = {
   id: null,
-  list: null
+  lists: null
 };
 
 export default ListForm;

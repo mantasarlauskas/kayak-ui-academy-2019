@@ -1,4 +1,4 @@
-import { GOT_LISTS, GET_LISTS } from '../actions/lists';
+import { GET_CURRENT_LIST, GOT_CURRENT_LIST, RESET_CURRENT_LIST } from '../actions/currentList';
 
 const initialState = {
   array: [],
@@ -7,17 +7,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_LISTS:
+    case GET_CURRENT_LIST:
       return {
         ...state,
         isLoading: true
       };
-    case GOT_LISTS:
+    case GOT_CURRENT_LIST:
       return {
-        ...state,
-        array: action.lists,
+        array: action.list,
         isLoading: false
       };
+    case RESET_CURRENT_LIST:
+      return initialState;
     default:
       return state;
   }
