@@ -9,6 +9,8 @@ import {
 
 export const GET_LISTS = 'GET_LISTS';
 export const GOT_LISTS = 'GOT_LISTS';
+export const SET_SORT = 'SET_SORT';
+export const RESET_SORT = 'RESET_SORT';
 
 const getLists = () => ({
   type: GET_LISTS
@@ -17,6 +19,15 @@ const getLists = () => ({
 const gotLists = lists => ({
   type: GOT_LISTS,
   lists
+});
+
+export const setSort = sortBy => ({
+  type: SET_SORT,
+  sortBy
+});
+
+export const resetSort = () => ({
+  type: RESET_SORT
 });
 
 export const addMovie = (id, movieId) => async dispatch => {

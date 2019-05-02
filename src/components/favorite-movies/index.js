@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { setMovies as setMoviesAction } from '../../actions/favorites';
 
 const FavouriteMovies = ({ movies, setMovies }) => {
@@ -24,7 +23,13 @@ const FavouriteMovies = ({ movies, setMovies }) => {
 };
 
 FavouriteMovies.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  setMovies: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

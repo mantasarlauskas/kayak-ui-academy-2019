@@ -1,8 +1,9 @@
-import { GOT_LISTS, GET_LISTS } from '../actions/lists';
+import { GOT_LISTS, GET_LISTS, SET_SORT, RESET_SORT } from '../actions/lists';
 
 const initialState = {
   array: [],
-  isLoading: false
+  isLoading: false,
+  sortBy: 'TITLE_ASC'
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +18,16 @@ export default (state = initialState, action) => {
         ...state,
         array: action.lists,
         isLoading: false
+      };
+    case SET_SORT:
+      return {
+        ...state,
+        sortBy: action.sortBy
+      };
+    case RESET_SORT:
+      return {
+        ...state,
+        sortBy: initialState.sortBy
       };
     default:
       return state;

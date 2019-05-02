@@ -1,43 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ListCard from '../list-card';
+import ListSort from '../list-sort';
 import Pagination from '../pagination';
 import Spinner from '../spinner';
 
-const List = ({ lists, id }) => {
+const List = ({ list, isLoading, id, resetSort }) => {
   const [exists, setExists] = useState(false);
   const [currentList, setCurrentList] = useState(null);
 
+  useEffect(() => () => resetSort(), []);
+
   useEffect(() => {
-    const list = lists.array.find(({ id: listId }) => listId === id);
     if (list) {
       setExists(true);
-      setCurrentList(list);
+      setCurrentList(list.results);
     }
-  }, [lists]);
+  }, [list]);
 
-  return lists.isLoading ? (
+  return isLoading ? (
     <Spinner />
   ) : !exists ? (
     <div>tokio listo nera</div>
-  ) : currentList.results.length > 0 ? (
-    <Pagination
-      data={currentList.results}
-      additionalProps={{ listId: id }}
-      itemsPerPage={2}
-      Component={ListCard}
-    />
+  ) : currentList.length > 0 ? (
+    <Fragment>
+      <Pagination
+        data={currentList}
+        additionalProps={{ listId: id }}
+        itemsPerPage={2}
+        Component={ListCard}
+      />
+      <ListSort />
+    </Fragment>
   ) : (
     <div>listas tuscias</div>
   );
 };
 
 List.propTypes = {
-  lists: PropTypes.shape({
-    array: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired
-  }).isRequired,
-  id: PropTypes.number.isRequired
+  list: PropTypes.shape({
+    results: PropTypes.array.isRequired
+  }),
+  isLoading: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  resetSort: PropTypes.func.isRequired
+};
+
+List.defaultProps = {
+  list: null
 };
 
 export default List;
