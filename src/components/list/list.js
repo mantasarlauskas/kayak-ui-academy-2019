@@ -4,22 +4,24 @@ import ListCard from '../list-card';
 import Pagination from '../pagination';
 import Spinner from '../spinner';
 
-const List = ({ lists, currentList, setCurrentList, id }) => {
+const List = ({ lists, id }) => {
   const [exists, setExists] = useState(false);
+  const [currentList, setCurrentList] = useState(null);
 
   useEffect(() => {
-    if (lists.array.find(list => list.id === id)) {
+    const list = lists.array.find(({ id: listId }) => listId === id);
+    if (list) {
       setExists(true);
-      setCurrentList(id);
+      setCurrentList(list);
     }
   }, [lists]);
 
-  return lists.isLoading || currentList.isLoading ? (
+  return lists.isLoading ? (
     <Spinner />
   ) : !exists ? (
     <div>tokio listo nera</div>
-  ) : currentList.array.length > 0 ? (
-    <Pagination data={currentList.array} itemsPerPage={2} Component={ListCard} />
+  ) : currentList.results.length > 0 ? (
+    <Pagination data={currentList.results} itemsPerPage={2} Component={ListCard} />
   ) : (
     <div>listas tuscias</div>
   );
@@ -30,11 +32,6 @@ List.propTypes = {
     array: PropTypes.array.isRequired,
     isLoading: PropTypes.bool.isRequired
   }).isRequired,
-  currentList: PropTypes.shape({
-    array: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired
-  }).isRequired,
-  setCurrentList: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired
 };
 

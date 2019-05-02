@@ -2,9 +2,16 @@ import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { imagePath } from '../../services/movieDB';
 
-const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie }) => {
+const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie, movieList }) => {
   const [showList, setShowList] = useState(false);
   const [list, setList] = useState(null);
+
+  useEffect(
+    () => () => {
+      setShowList(false);
+    },
+    [selectedMovie]
+  );
 
   useEffect(() => {
     if (lists.length > 0) {
@@ -31,6 +38,8 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie 
     </Fragment>
   );
 
+  const showMovieLists = ({ name, id }) => <div key={id}>{name}</div>;
+
   return (
     <div>
       <div className="mb-30">
@@ -46,6 +55,10 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie 
           <div className="asset-meta">{selectedMovie.original_title}</div>
           <div className="asset-meta">{selectedMovie.original_language}</div>
           <div className="asset-description">{selectedMovie.overview}</div>
+          <div className="asset-meta">
+            Listai:
+            {movieList.length > 0 ? movieList.map(showMovieLists) : 'nera jokiame liste'}
+          </div>
           <button
             type="button"
             className="button mt-30"
@@ -76,6 +89,12 @@ MovieCard.propTypes = {
   addMovie: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   lists: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })
+  ).isRequired,
+  movieList: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired

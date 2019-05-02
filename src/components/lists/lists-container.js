@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setLists } from '../../actions/lists';
+import { setLists, removeList } from '../../actions/lists';
 import Lists from './lists';
 
 const mapStateToProps = ({ lists: { array, isLoading } }) => ({
@@ -8,7 +8,8 @@ const mapStateToProps = ({ lists: { array, isLoading } }) => ({
 });
 
 const mapDispatchToProps = {
-  setLists
+  setLists,
+  removeList
 };
 
 export default connect(

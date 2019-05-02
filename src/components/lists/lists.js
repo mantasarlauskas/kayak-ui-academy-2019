@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../spinner';
 import styles from './lists.scss';
 
-const Lists = ({ lists, isLoading }) => (
+const Lists = ({ lists, isLoading, removeList }) => (
   <div className={styles.container}>
     {isLoading ? (
       <Spinner />
@@ -13,6 +13,9 @@ const Lists = ({ lists, isLoading }) => (
         <div key={id}>
           <Link to={`/list/${id}`}>{`${name} ${description}`}</Link>
           <Link to={`/edit-list/${id}`}>Edit</Link>
+          <button type="button" onClick={() => removeList(id)}>
+            Remove
+          </button>
         </div>
       ))
     )}
@@ -30,7 +33,8 @@ Lists.propTypes = {
       description: PropTypes.string.isRequired
     })
   ).isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  removeList: PropTypes.func.isRequired
 };
 
 export default Lists;

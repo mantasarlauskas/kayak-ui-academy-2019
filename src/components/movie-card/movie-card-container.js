@@ -7,8 +7,9 @@ const mapStateToProps = (
   { lists: { array }, favorites: { movies } },
   { selectedMovie: { id } }
 ) => ({
-  lists: array,
-  isFavorite: !!movies.find(movie => movie.id === id)
+  lists: array.filter(({ results }) => !results.find(movie => movie.id === id)),
+  isFavorite: !!movies.find(movie => movie.id === id),
+  movieList: array.filter(({ results }) => !!results.find(movie => movie.id === id))
 });
 
 const mapDispatchToProps = {

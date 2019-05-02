@@ -44,18 +44,19 @@ export const getMoviesList = ids => {
   return Promise.all(promises);
 };
 
+const getMoviesFromLists = async lists => {
+  const promises = lists.map(async ({ id }) => {
+    const { data } = await axios.get(`${url}/list/${id}`, config);
+    return data;
+  });
+  return Promise.all(promises);
+};
+
 export const getLists = async () => {
   const {
     data: { results }
   } = await axios.get(`${url}/account/${accountID}/lists`, config);
-  return results;
-};
-
-export const getList = async id => {
-  const {
-    data: { results }
-  } = await axios.get(`${url}/list/${id}`, config);
-  return results;
+  return getMoviesFromLists(results);
 };
 
 export const addMovieToList = async (id, movieId) =>
@@ -69,3 +70,5 @@ export const createList = async data =>
   axios.post(`${url}/list`, { ...data, iso_639_1: 'en' }, config);
 
 export const updateList = async ({ id, ...data }) => axios.put(`${url}/list/${id}`, data, config);
+
+export const deleteLIst = async id => axios.delete(`${url}/list/${id}`, config);
