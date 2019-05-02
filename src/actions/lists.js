@@ -3,7 +3,8 @@ import {
   createList,
   updateList,
   addMovieToList,
-  deleteLIst
+  deleteList,
+  deleteMovieFromList
 } from '../services/movieDB';
 
 export const GET_LISTS = 'GET_LISTS';
@@ -23,6 +24,11 @@ export const addMovie = (id, movieId) => async dispatch => {
   dispatch(setLists());
 };
 
+export const deleteMovie = (id, movieId) => async dispatch => {
+  await deleteMovieFromList(id, movieId);
+  dispatch(setLists());
+};
+
 export const setLists = () => async dispatch => {
   dispatch(getLists());
   const lists = await fetchLists();
@@ -30,7 +36,7 @@ export const setLists = () => async dispatch => {
 };
 
 export const removeList = id => async dispatch => {
-  await deleteLIst(id);
+  await deleteList(id);
   dispatch(setLists());
 };
 

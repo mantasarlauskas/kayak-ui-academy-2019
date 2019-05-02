@@ -66,9 +66,15 @@ export const addMovieToList = async (id, movieId) =>
     config
   );
 
+export const deleteMovieFromList = async (id, movieId) =>
+  axios.delete(`${url}/list/${id}/items`, {
+    data: { items: [{ media_type: 'movie', media_id: movieId }] },
+    ...config
+  });
+
 export const createList = async data =>
   axios.post(`${url}/list`, { ...data, iso_639_1: 'en' }, config);
 
 export const updateList = async ({ id, ...data }) => axios.put(`${url}/list/${id}`, data, config);
 
-export const deleteLIst = async id => axios.delete(`${url}/list/${id}`, config);
+export const deleteList = async id => axios.delete(`${url}/list/${id}`, config);

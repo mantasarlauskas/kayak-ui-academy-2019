@@ -1,14 +1,14 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const Pagination = ({ itemsPerPage, data, Component }) => {
+const Pagination = ({ itemsPerPage, data, Component, additionalProps }) => {
   const [page, setPage] = useState(0);
   const [paginatedData, setPaginatedData] = useState([]);
   const pageCount = Math.ceil(data.length / itemsPerPage);
 
   useEffect(() => {
     paginateData();
-  }, [page]);
+  }, [page, data]);
 
   const paginateData = () => {
     const newData = data.filter(
@@ -33,8 +33,8 @@ const Pagination = ({ itemsPerPage, data, Component }) => {
 
   return (
     <Fragment>
-      {paginatedData.map(({ id, ...item }) => (
-        <Component key={id} {...item} />
+      {paginatedData.map(item => (
+        <Component key={item.id} {...item} {...additionalProps} />
       ))}
       <nav>
         <ul className="pagination">
@@ -58,7 +58,12 @@ const Pagination = ({ itemsPerPage, data, Component }) => {
 Pagination.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   data: PropTypes.array.isRequired,
-  Component: PropTypes.elementType.isRequired
+  Component: PropTypes.elementType.isRequired,
+  additionalProps: PropTypes.object
+};
+
+Pagination.defaultProps = {
+  additionalProps: {}
 };
 
 export default Pagination;

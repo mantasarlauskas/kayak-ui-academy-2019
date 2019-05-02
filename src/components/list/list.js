@@ -21,7 +21,12 @@ const List = ({ lists, id }) => {
   ) : !exists ? (
     <div>tokio listo nera</div>
   ) : currentList.results.length > 0 ? (
-    <Pagination data={currentList.results} itemsPerPage={2} Component={ListCard} />
+    <Pagination
+      data={currentList.results}
+      additionalProps={{ listId: id }}
+      itemsPerPage={2}
+      Component={ListCard}
+    />
   ) : (
     <div>listas tuscias</div>
   );

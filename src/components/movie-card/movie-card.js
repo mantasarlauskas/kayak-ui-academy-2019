@@ -4,14 +4,11 @@ import { imagePath } from '../../services/movieDB';
 
 const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie, movieList }) => {
   const [showList, setShowList] = useState(false);
-  const [list, setList] = useState(null);
+  const [list, setList] = useState('');
 
-  useEffect(
-    () => () => {
-      setShowList(false);
-    },
-    [selectedMovie]
-  );
+  useEffect(() => {
+    setShowList(false);
+  }, [selectedMovie]);
 
   useEffect(() => {
     if (lists.length > 0) {
@@ -29,7 +26,7 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
         ))}
       </select>
       <button
-        type="submit"
+        type="button"
         className="button mt-30"
         onClick={() => addMovie(list, selectedMovie.id)}
       >
@@ -37,8 +34,6 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
       </button>
     </Fragment>
   );
-
-  const showMovieLists = ({ name, id }) => <div key={id}>{name}</div>;
 
   return (
     <div>
@@ -57,7 +52,9 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
           <div className="asset-description">{selectedMovie.overview}</div>
           <div className="asset-meta">
             Listai:
-            {movieList.length > 0 ? movieList.map(showMovieLists) : 'nera jokiame liste'}
+            {movieList.length > 0
+              ? movieList.map(({ name, id }) => <div key={id}>{name}</div>)
+              : 'nera jokiame liste'}
           </div>
           <button
             type="button"
@@ -69,7 +66,12 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
           <button type="button" className="button mt-30" onClick={() => setShowList(!showList)}>
             {showList ? 'Close' : 'Add to list'}
           </button>
-          {showList && (lists.length > 0 ? showListSelect : <div>listu nera</div>)}
+          {showList &&
+            (lists.length > 0 ? (
+              showListSelect
+            ) : (
+              <div>listu nera i kuriuos butu galima ideti filma</div>
+            ))}
         </div>
         <div className="card__thumbnail">
           <img

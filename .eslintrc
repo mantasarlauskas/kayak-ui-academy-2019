@@ -33,6 +33,7 @@
     "no-use-before-define": "off",
     "consistent-return": "off",
     "prefer-destructuring": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "camelcase": "warn"
   }
 }
