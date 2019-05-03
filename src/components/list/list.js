@@ -5,7 +5,7 @@ import ListSort from '../list-sort';
 import Pagination from '../pagination';
 import Spinner from '../spinner';
 
-const List = ({ list, isLoading, id, resetSort }) => {
+const List = ({ list, isLoading, id, resetSort, deleteAllMovies }) => {
   const [exists, setExists] = useState(false);
   const [currentList, setCurrentList] = useState(null);
 
@@ -24,6 +24,9 @@ const List = ({ list, isLoading, id, resetSort }) => {
     <div>tokio listo nera</div>
   ) : currentList.length > 0 ? (
     <Fragment>
+      <button type="button" className="btn btn-danger" onClick={() => deleteAllMovies(id)}>
+        Clear list
+      </button>
       <Pagination
         data={currentList}
         additionalProps={{ listId: id }}
@@ -43,7 +46,8 @@ List.propTypes = {
   }),
   isLoading: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
-  resetSort: PropTypes.func.isRequired
+  resetSort: PropTypes.func.isRequired,
+  deleteAllMovies: PropTypes.func.isRequired
 };
 
 List.defaultProps = {

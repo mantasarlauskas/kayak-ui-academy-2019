@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
-import { resetSort } from '../../actions/lists';
+import { resetSort, deleteAllMovies } from '../../actions/lists';
 import List from './list';
 
+const getList = (lists, id) => lists.find(({ id: listId }) => listId === parseInt(id, 10));
+
 const getSortedListMovies = (lists, sortBy, id) => {
-  const list = lists.find(({ id: listId }) => listId === parseInt(id, 10));
+  const list = getList(lists, id);
   if (list) {
     switch (sortBy) {
       case 'TITLE_DESC':
@@ -75,7 +77,8 @@ const mapStateToProps = (
 });
 
 const mapDispatchToProps = {
-  resetSort
+  resetSort,
+  deleteAllMovies
 };
 
 export default connect(
