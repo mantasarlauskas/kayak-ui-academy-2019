@@ -37,7 +37,7 @@ const ListSelect = ({ lists, addMovie, selectedMovieId }) => {
     </form>
   ) : (
     <div className="alert alert-danger text-centered mt-3">
-      There are no lists for this movie to be added to
+      There are no lists available for this movie to be added to
     </div>
   );
 };

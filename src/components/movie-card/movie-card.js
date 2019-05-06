@@ -15,35 +15,44 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, movieLists }) =>
       <div className="mb-30">
         <h3>Selected Movie</h3>
       </div>
-      <article className="card mb-30">
-        <div className="card__header">
+      <article className="movie-movie-card mb-30">
+        <div className="movie-card__header">
           <div className="asset-meta">{selectedMovie.vote_average}</div>
           <h2 className="asset-title">{selectedMovie.title}</h2>
         </div>
-        <div className="card__body">
+        <div className="movie-card__body">
           <div className="asset-meta">{selectedMovie.release_date}</div>
           <div className="asset-meta">{selectedMovie.original_title}</div>
           <div className="asset-meta">{selectedMovie.original_language}</div>
           <div className="asset-description">{selectedMovie.overview}</div>
           <div className="asset-meta">
-            Listai:
-            {movieLists.length > 0
-              ? movieLists.map(({ name, id }) => <div key={id}>{name}</div>)
-              : 'nera jokiame liste'}
+            {movieLists.length > 0 ? (
+              movieLists.map(({ name, id }) => <div key={id}>{name}</div>)
+            ) : (
+              <div className="alert alert-warning mt-3">
+                This movie has not been added to a list yet
+              </div>
+            )}
           </div>
-          <button
-            type="button"
-            className="button mt-30"
-            onClick={() => toggleFavorite(selectedMovie)}
-          >
-            {isFavorite ? 'Remove from favorites!' : 'Add to favorites!'}
-          </button>
-          <button type="button" className="button mt-30" onClick={() => setShowList(!showList)}>
-            {showList ? 'Close' : 'Add to list'}
-          </button>
+          <div className="clearfix mt-4">
+            <button
+              type="button"
+              className="button float-left"
+              onClick={() => toggleFavorite(selectedMovie)}
+            >
+              {isFavorite ? 'Remove from favorites!' : 'Add to favorites!'}
+            </button>
+            <button
+              type="button"
+              className="button float-right"
+              onClick={() => setShowList(!showList)}
+            >
+              {showList ? 'Close' : 'Add to list'}
+            </button>
+          </div>
           {showList && <ListSelect />}
         </div>
-        <div className="card__thumbnail">
+        <div className="movie-card__thumbnail">
           <img
             className="asset-poster"
             src={`${imagePath}${selectedMovie.poster_path}`}

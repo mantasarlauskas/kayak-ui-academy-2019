@@ -4,7 +4,7 @@ import React from 'react';
 import MovieCardWrapper from '../movie-card-wrapper';
 import MovieCard from '../movie-card';
 import FavouriteMovies from '../favorite-movies';
-import '../../client/movies/index.scss';
+import styles from './main.scss';
 
 const Main = ({ selectedMovie }) => (
   <div className="page-content container">
@@ -16,9 +16,13 @@ const Main = ({ selectedMovie }) => (
     <aside className="aside">
       <div className="container">
         <div className="content-wrapper">
-          <h3>
-            <Link to="/lists">My Lists</Link>
-          </h3>
+          <div className={styles.listButtonWrapper}>
+            <Link to="/lists">
+              <button type="button" className="btn btn-primary">
+                My Lists
+              </button>
+            </Link>
+          </div>
           <FavouriteMovies />
         </div>
       </div>
