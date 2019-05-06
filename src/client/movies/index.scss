@@ -10,6 +10,16 @@
 @import 'styles/components/input.scss';
 
 :global {
+  html,
+  body {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
   #app {
     background: #eff6fc;
   }

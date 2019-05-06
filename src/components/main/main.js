@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import MovieCardWrapper from '../movie-card-wrapper';
 import MovieCard from '../movie-card';
@@ -7,16 +8,21 @@ import '../../client/movies/index.scss';
 
 const Main = ({ selectedMovie }) => (
   <div className="page-content container">
-    <MovieCardWrapper>
-      {selectedMovie ? (
-        <MovieCard selectedMovie={selectedMovie} />
-      ) : (
-        <div className="mb-30">
-          <h3>Selected Movie</h3>
+    {selectedMovie && (
+      <MovieCardWrapper>
+        <MovieCard />
+      </MovieCardWrapper>
+    )}
+    <aside className="aside">
+      <div className="container">
+        <div className="content-wrapper">
+          <h3>
+            <Link to="/lists">My Lists</Link>
+          </h3>
+          <FavouriteMovies />
         </div>
-      )}
-    </MovieCardWrapper>
-    <FavouriteMovies />
+      </div>
+    </aside>
   </div>
 );
 

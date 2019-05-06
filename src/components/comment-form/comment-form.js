@@ -22,9 +22,22 @@ const CommentForm = ({ initialComment, addMovieComment, movieId, listId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <div>negali buti tusciu laukeliu</div>}
-      <input type="text" value={comment} onChange={({ target: { value } }) => setComment(value)} />
-      <button type="submit">submit</button>
+      {error && <div className="alert alert-danger mt-3">Field must not be empty</div>}
+      <div className="form-group mt-3">
+        <label className="w-100" htmlFor="comment">
+          Comment
+          <input
+            id="comment"
+            type="text"
+            value={comment}
+            className="form-control mt-2"
+            onChange={({ target: { value } }) => setComment(value)}
+          />
+        </label>
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
     </form>
   );
 };
@@ -37,7 +50,7 @@ CommentForm.propTypes = {
 };
 
 CommentForm.defaultProps = {
-  initialComment: null
+  initialComment: ''
 };
 
 export default CommentForm;

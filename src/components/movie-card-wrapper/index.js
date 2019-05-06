@@ -9,8 +9,8 @@ const MovieCardWrapper = ({ children }) => (
   </main>
 );
 
-export default MovieCardWrapper;
-
 MovieCardWrapper.propTypes = {
   children: PropTypes.node.isRequired
-}
+};
+
+export default MovieCardWrapper;

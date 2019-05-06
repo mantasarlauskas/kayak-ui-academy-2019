@@ -1,39 +1,14 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ListSelect from '../list-select';
 import { imagePath } from '../../services/movieDB';
 
-const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie, movieList }) => {
+const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, movieLists }) => {
   const [showList, setShowList] = useState(false);
-  const [list, setList] = useState('');
 
   useEffect(() => {
     setShowList(false);
   }, [selectedMovie]);
-
-  useEffect(() => {
-    if (lists.length > 0) {
-      setList(lists[0].id);
-    }
-  }, [lists]);
-
-  const showListSelect = (
-    <Fragment>
-      <select value={list} onChange={({ target: { value } }) => setList(parseInt(value, 10))}>
-        {lists.map(({ name, id }) => (
-          <option key={id} value={id}>
-            {name}
-          </option>
-        ))}
-      </select>
-      <button
-        type="button"
-        className="button mt-30"
-        onClick={() => addMovie(list, selectedMovie.id)}
-      >
-        Submit
-      </button>
-    </Fragment>
-  );
 
   return (
     <div>
@@ -52,8 +27,8 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
           <div className="asset-description">{selectedMovie.overview}</div>
           <div className="asset-meta">
             Listai:
-            {movieList.length > 0
-              ? movieList.map(({ name, id }) => <div key={id}>{name}</div>)
+            {movieLists.length > 0
+              ? movieLists.map(({ name, id }) => <div key={id}>{name}</div>)
               : 'nera jokiame liste'}
           </div>
           <button
@@ -66,12 +41,7 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
           <button type="button" className="button mt-30" onClick={() => setShowList(!showList)}>
             {showList ? 'Close' : 'Add to list'}
           </button>
-          {showList &&
-            (lists.length > 0 ? (
-              showListSelect
-            ) : (
-              <div>listu nera i kuriuos butu galima ideti filma</div>
-            ))}
+          {showList && <ListSelect />}
         </div>
         <div className="card__thumbnail">
           <img
@@ -86,17 +56,19 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, lists, addMovie,
 };
 
 MovieCard.propTypes = {
-  selectedMovie: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  selectedMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    vote_average: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    release_date: PropTypes.string.isRequired,
+    original_title: PropTypes.string.isRequired,
+    original_language: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    poster_path: PropTypes.string.isRequired
+  }).isRequired,
   toggleFavorite: PropTypes.func.isRequired,
-  addMovie: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  lists: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired
-    })
-  ).isRequired,
-  movieList: PropTypes.arrayOf(
+  movieLists: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentForm from '../comment-form';
 import { imagePath } from '../../services/movieDB';
+import styles from './list-card.scss';
 
 const ListCard = ({
   poster_path,
@@ -17,35 +18,34 @@ const ListCard = ({
   const [openCommentForm, setOpenCommentForm] = useState(false);
 
   return (
-    <div className="card" style={{ width: '18rem' }}>
+    <div className="card mb-5">
       <img className="card-img-top" src={`${imagePath}${poster_path}`} alt={title} />
       <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{overview}</p>
-        <p className="card-text">
-          Rating:
-          {vote_average}
+        <h4 className="card-title">{title}</h4>
+        <p>
+          <strong>{`Rating: ${vote_average}`}</strong>
         </p>
-        <p className="card-text">
-          Date:
-          {release_date}
+        <p>
+          <em>{` Date: ${release_date}`}</em>
         </p>
-        <button type="button" className="btn btn-danger" onClick={() => deleteMovie(listId, id)}>
-          Remove from this list
-        </button>
-        {comment && (
-          <p className="card-text">
-            Komentaras:
-            {comment}
-          </p>
-        )}
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => setOpenCommentForm(!openCommentForm)}
-        >
-          {openCommentForm ? 'Close form' : comment ? 'Edit comment' : 'Add comment'}
-        </button>
+        <p>{comment ? `Comment: ${comment}` : 'No comments yet'}</p>
+        <p className={styles.cardText}>{overview}</p>
+        <div className="clearfix">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => setOpenCommentForm(!openCommentForm)}
+          >
+            {openCommentForm ? 'Close form' : comment ? 'Edit comment' : 'Add comment'}
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger float-right"
+            onClick={() => deleteMovie(listId, id)}
+          >
+            Delete
+          </button>
+        </div>
         {openCommentForm && <CommentForm initialComment={comment} movieId={id} listId={listId} />}
       </div>
     </div>
@@ -65,7 +65,7 @@ ListCard.propTypes = {
 };
 
 ListCard.defaultProps = {
-  comment: null
+  comment: ''
 };
 
 export default ListCard;

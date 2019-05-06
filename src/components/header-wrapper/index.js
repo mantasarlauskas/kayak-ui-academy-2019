@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const HeaderWrapper = ({ children }) => (
@@ -8,7 +8,9 @@ const HeaderWrapper = ({ children }) => (
       <div className="content-wrapper">
         <div className="search">
           <div className="search pt-60 pb-15">
-            <h1 className="text-centered pb-15">App title placeholder</h1>
+            <h1 className="text-centered pb-15">
+              <Link to="/">My movies</Link>
+            </h1>
             <div className="autocomplete field max-width-600 block-centered">{children}</div>
           </div>
         </div>
@@ -17,8 +19,8 @@ const HeaderWrapper = ({ children }) => (
   </header>
 );
 
-export default HeaderWrapper;
-
 HeaderWrapper.propTypes = {
   children: PropTypes.node.isRequired
 };
+
+export default HeaderWrapper;

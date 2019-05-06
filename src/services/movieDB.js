@@ -2,15 +2,16 @@ import axios from 'axios';
 
 const accountID = '5cc752a2c3a36820b58664db';
 const apiKey = '309d013fc2c6056e01770285c01bd2a1';
+const url = 'https://api.themoviedb.org/4';
+const moviesMemo = {};
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NTY2MTc4MjQsInN1YiI6IjVjYzc1MmEyYzNhMzY4MjBiNTg2NjRkYiIsImp0aSI6IjEzMDUzODgiLCJhdWQiOiIzMDlkMDEzZmMyYzYwNTZlMDE3NzAyODVjMDFiZDJhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.xQSaQ7SlGWd2KDp6-zhzkWDA9P0uoOfc3y-3IAKOY_o';
-const url = 'https://api.themoviedb.org/4';
 const config = {
   headers: {
     Authorization: `Bearer ${token}`
   }
 };
-const moviesMemo = {};
+
 export const imagePath = 'https://image.tmdb.org/t/p/w500';
 
 export const getMovies = query => {
@@ -59,31 +60,30 @@ export const getLists = async () => {
   return getMoviesFromLists(results);
 };
 
-export const addMovieToList = async (id, movieId) =>
+export const addMovieToList = (id, movieId) =>
   axios.post(
     `${url}/list/${id}/items`,
     { items: [{ media_type: 'movie', media_id: movieId }] },
     config
   );
 
-export const deleteMovieFromList = async (id, movieId) =>
+export const deleteMovieFromList = (id, movieId) =>
   axios.delete(`${url}/list/${id}/items`, {
     data: { items: [{ media_type: 'movie', media_id: movieId }] },
     ...config
   });
 
-export const setMovieComment = async (id, movieId, comment) =>
+export const setMovieComment = (id, movieId, comment) =>
   axios.put(
     `${url}/list/${id}/items`,
     { items: [{ media_type: 'movie', media_id: movieId, comment }] },
     config
   );
 
-export const createList = async data =>
-  axios.post(`${url}/list`, { ...data, iso_639_1: 'en' }, config);
+export const createList = data => axios.post(`${url}/list`, { ...data, iso_639_1: 'en' }, config);
 
-export const updateList = async ({ id, ...data }) => axios.put(`${url}/list/${id}`, data, config);
+export const updateList = ({ id, ...data }) => axios.put(`${url}/list/${id}`, data, config);
 
-export const deleteList = async id => axios.delete(`${url}/list/${id}`, config);
+export const deleteList = id => axios.delete(`${url}/list/${id}`, config);
 
-export const clearList = async id => axios.get(`${url}/list/${id}/clear`, config);
+export const clearList = id => axios.get(`${url}/list/${id}/clear`, config);

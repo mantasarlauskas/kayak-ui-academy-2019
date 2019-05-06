@@ -6,18 +6,25 @@ import styles from './lists.scss';
 
 const Lists = ({ lists, isLoading, removeList }) => (
   <div className={styles.container}>
+    <Link to="/add-list" style={{ width: '10rem' }} className="btn btn-primary">
+      Add new list
+    </Link>
     {isLoading ? (
       <Spinner />
-    ) : (
+    ) : lists.length > 0 ? (
       lists.map(({ id, name, description }) => (
         <div key={id}>
           <Link to={`/list/${id}`}>{`${name} ${description}`}</Link>
-          <Link to={`/edit-list/${id}`}>Edit</Link>
-          <button type="button" onClick={() => removeList(id)}>
+          <Link className="btn btn-primary" to={`/edit-list/${id}`}>
+            Edit
+          </Link>
+          <button className="btn btn-danger" type="button" onClick={() => removeList(id)}>
             Remove
           </button>
         </div>
       ))
+    ) : (
+      <div className="alert alert-warning mt-3">There are no lists yet</div>
     )}
   </div>
 );

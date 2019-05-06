@@ -33,11 +33,15 @@ const Pagination = ({ itemsPerPage, data, Component, additionalProps }) => {
 
   return (
     <Fragment>
-      {paginatedData.map(item => (
-        <Component key={item.id} {...item} {...additionalProps} />
-      ))}
-      <nav>
-        <ul className="pagination">
+      <div className="row justify-content-center">
+        {paginatedData.map(item => (
+          <div className="col-4" key={item.id}>
+            <Component {...item} {...additionalProps} />
+          </div>
+        ))}
+      </div>
+      <nav className="clearfix mb-5">
+        <ul className="pagination float-right">
           <li className="page-item">
             <button type="button" className="page-link" onClick={() => handlePageChange(page - 1)}>
               Previous

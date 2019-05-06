@@ -64,16 +64,16 @@ const getSortedListMovies = (lists, sortBy, id) => {
 };
 
 const mapStateToProps = (
-  { lists },
+  { lists: { array, sortBy, isLoading } },
   {
     match: {
       params: { id }
     }
   }
 ) => ({
-  list: getSortedListMovies(lists.array, lists.sortBy, id),
-  isLoading: lists.isLoading,
-  id: parseInt(id, 10)
+  list: getSortedListMovies(array, sortBy, id),
+  id: parseInt(id, 10),
+  isLoading
 });
 
 const mapDispatchToProps = {

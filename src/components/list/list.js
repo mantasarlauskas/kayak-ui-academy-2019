@@ -18,25 +18,39 @@ const List = ({ list, isLoading, id, resetSort, deleteAllMovies }) => {
     }
   }, [list]);
 
-  return isLoading ? (
-    <Spinner />
-  ) : !exists ? (
-    <div>tokio listo nera</div>
-  ) : currentList.length > 0 ? (
-    <Fragment>
-      <button type="button" className="btn btn-danger" onClick={() => deleteAllMovies(id)}>
-        Clear list
-      </button>
-      <Pagination
-        data={currentList}
-        additionalProps={{ listId: id }}
-        itemsPerPage={2}
-        Component={ListCard}
-      />
-      <ListSort />
-    </Fragment>
-  ) : (
-    <div>listas tuscias</div>
+  return (
+    <div className="container">
+      {isLoading ? (
+        <Spinner />
+      ) : !exists ? (
+        <div className="text-centered alert alert-danger mt-3">This list does not exist</div>
+      ) : currentList.length > 0 ? (
+        <Fragment>
+          <h2 className="text-centered mt-15 mb-15">{list.name}</h2>
+          <p className="card card-body">
+            <em>{list.description}</em>
+          </p>
+          <div className="clearfix">
+            <ListSort className="float-left" />
+            <button
+              type="button"
+              className="btn btn-danger float-right mb-3"
+              onClick={() => deleteAllMovies(id)}
+            >
+              Clear list
+            </button>
+          </div>
+          <Pagination
+            data={currentList}
+            additionalProps={{ listId: id }}
+            itemsPerPage={3}
+            Component={ListCard}
+          />
+        </Fragment>
+      ) : (
+        <div className="text-centered alert alert-warning mt-3">List is empty</div>
+      )}
+    </div>
   );
 };
 

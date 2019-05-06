@@ -7,7 +7,7 @@ $width__child-unit-card: 250px;
 }
 
 :global {
-  .card {
+  .movie-card {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -$padding__unit-card;

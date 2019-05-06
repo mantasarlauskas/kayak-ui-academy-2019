@@ -1,21 +1,13 @@
 import { connect } from 'react-redux';
-
-import { setGenres, setMovies, clearMovies } from '../../actions/search';
-import Autocomplete from './autocomplete-with-hooks';
-
-const mapStateToProps = state => ({
-  genres: state.search.genres,
-  results: state.search.movies,
-  isMoviesLoading: state.search.isMoviesLoading
-});
+import { setGenres, setMovies } from '../../actions/search';
+import Autocomplete from './autocomplete';
 
 const mapDispatchToProps = {
   setGenres,
-  setMovies,
-  clearMovies
+  setMovies
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Autocomplete);

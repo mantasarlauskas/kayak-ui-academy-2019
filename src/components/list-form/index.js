@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../spinner';
+import styles from './list-form.scss';
 
 const ListForm = ({ history, submitForm, lists, id }) => {
   const [name, setName] = useState('');
@@ -46,17 +47,50 @@ const ListForm = ({ history, submitForm, lists, id }) => {
     }
   };
 
-  return lists && lists.isLoading ? (
-    <Spinner />
-  ) : lists && (!name && !description) ? (
-    <div>tokio jusu listo nera</div>
-  ) : (
-    <form onSubmit={handleSubmit}>
-      {error && <div>laukeliu tusciu negali buti!!</div>}
-      <input type="text" name="name" value={name} onChange={handleChange} />
-      <textarea name="description" value={description} onChange={handleChange} resize="none" />
-      <button type="submit">Submit</button>
-    </form>
+  return (
+    <div className="container">
+      {lists && lists.isLoading ? (
+        <Spinner />
+      ) : lists && (!name && !description) ? (
+        <div className="alert alert-danger mt-3 text-centered">This list does not exist</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h3 className="text-centered mt-3">List form</h3>
+          {error && (
+            <div className="text-centered alert alert-danger mt-3">All fields must be filled</div>
+          )}
+          <div className="form-group">
+            <label className="w-100" htmlFor="name">
+              Title
+              <input
+                className="form-control mt-2"
+                type="text"
+                name="name"
+                id="name"
+                value={name}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="w-100" htmlFor="description">
+              Description
+              <textarea
+                className="form-control mt-2"
+                name="description"
+                id="description"
+                value={description}
+                onChange={handleChange}
+                resize="none"
+              />
+            </label>
+          </div>
+          <button type="submit" className={`btn btn-primary ${styles.submitButton}`}>
+            Submit
+          </button>
+        </form>
+      )}
+    </div>
   );
 };
 

@@ -29,13 +29,15 @@ const options = [
 ];
 
 const ListSort = ({ setSort }) => (
-  <select style={{ width: '18rem' }} onChange={({ target: { value } }) => setSort(value)}>
-    {options.map(({ value, text }) => (
-      <option key={value} value={value}>
-        {text}
-      </option>
-    ))}
-  </select>
+  <div className="form-group w-25 mb-3 float-left">
+    <select className="form-control" onChange={({ target: { value } }) => setSort(value)}>
+      {options.map(({ value, text }) => (
+        <option key={value} value={value}>
+          {text}
+        </option>
+      ))}
+    </select>
+  </div>
 );
 
 ListSort.propTypes = {

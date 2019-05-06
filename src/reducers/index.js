@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import search from './search';
 import favorites from './favorites';
 import selectedMovie from './selectedMovie';

@@ -10,47 +10,35 @@ import Lists from '../lists';
 import AddListForm from '../add-list-form';
 import EditListForm from '../edit-list-form';
 import List from '../list';
-import styles from './app.scss';
 import '../../client/movies/index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const App = ({ setMovie, setLists, history, location }) => {
+const App = ({ setLists }) => {
   useEffect(() => {
     setLists();
   }, []);
 
-  const handleSelect = movie => {
-    setMovie(movie);
-    if (location.pathname !== '/') {
-      history.push('/');
-    }
-  };
-
   return (
-    <div className={styles.container}>
+    <div className="page-wrapper">
       <HeaderWrapper>
-        <Autocomplete handleSelect={handleSelect} />
+        <Autocomplete />
       </HeaderWrapper>
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/lists" component={Lists} />
-        <Route path="/add-list" component={AddListForm} />
-        <Route path="/edit-list/:id" component={EditListForm} />
-        <Route path="/list/:id" component={List} />
-      </Switch>
+      <div className="page-content">
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/lists" component={Lists} />
+          <Route path="/add-list" component={AddListForm} />
+          <Route path="/edit-list/:id" component={EditListForm} />
+          <Route path="/list/:id" component={List} />
+        </Switch>
+      </div>
       <Footer />
     </div>
   );
 };
 
 App.propTypes = {
-  setMovie: PropTypes.func.isRequired,
-  setLists: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired
+  setLists: PropTypes.func.isRequired
 };
 
 export default withRouter(hot(App));
