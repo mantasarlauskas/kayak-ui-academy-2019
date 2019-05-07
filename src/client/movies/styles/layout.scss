@@ -45,15 +45,19 @@
     flex-direction: column;
     flex: 1 0 auto;
 
-    @include breakpoint-up(lg) {
-      flex-direction: row;
+    &--active {
+      @include breakpoint-up(lg) {
+        flex-direction: row;
+      }
     }
 
     .aside {
       order: 1;
 
-      @include breakpoint-up(lg) {
-        flex: 0 0 300px;
+      &--active {
+        @include breakpoint-up(lg) {
+          flex: 0 0 300px;
+        }
       }
     }
 

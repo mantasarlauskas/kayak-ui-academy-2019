@@ -8,7 +8,7 @@ const FavoriteMovies = ({ movies, setMovies }) => {
 
   return (
     <div className="mt-4">
-      <h3 className="text-centered">My Favourites</h3>
+      <h3 className="text-centered">My Favorites</h3>
       <ul className="list-group mt-3">
         {movies.map(movie => (
           <li className="list-group-item" key={movie.id}>

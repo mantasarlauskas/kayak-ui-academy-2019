@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const MovieLists = ({ movieLists }) =>
   movieLists.length > 0 ? (
     <Fragment>
-      <h5 className="text-centered">Movie belongs to these lists:</h5>
+      <h6 className="text-centered">Movie belongs to these lists:</h6>
       <ul className="list-group">
         {movieLists.map(({ name, id }) => (
           <li className="list-group-item" key={id}>

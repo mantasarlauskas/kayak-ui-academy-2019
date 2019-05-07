@@ -18,6 +18,7 @@
       flex-wrap: wrap;
       min-height: $size__inputs-buttons;
       padding: $padding__input;
+      cursor: pointer;
 
       &.favoriteItem {
         color: red !important;

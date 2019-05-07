@@ -15,35 +15,41 @@ const Lists = ({ lists, isLoading, removeList }) => (
     ) : lists.length > 0 ? (
       <Fragment>
         <h2 className="text-centered mb-3">My lists</h2>
-        <table className="table table-hover text-centered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th colSpan="2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lists.map(({ id, name }, index) => (
-              <tr key={id}>
-                <td>{index + 1}</td>
-                <td>
-                  <Link to={`/list/${id}`}>{`${name}`}</Link>
-                </td>
-                <td>
-                  <Link className="btn btn-primary" to={`/edit-list/${id}`}>
-                    Edit
-                  </Link>
-                </td>
-                <td>
-                  <button className="btn btn-danger" type="button" onClick={() => removeList(id)}>
-                    Remove
-                  </button>
-                </td>
+        <div className="table-responsive">
+          <table className="table table-hover text-centered">
+            <thead className="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {lists.map(({ id, name }, index) => (
+                <tr key={id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <Link to={`/list/${id}`}>{`${name}`}</Link>
+                  </td>
+                  <td>
+                    <div className="btn-group">
+                      <Link className="btn btn-primary" to={`/edit-list/${id}`}>
+                        Edit
+                      </Link>
+                      <button
+                        className="btn btn-danger"
+                        type="button"
+                        onClick={() => removeList(id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Fragment>
     ) : (
       <div className="alert alert-warning mt-3">No lists have been added yet</div>

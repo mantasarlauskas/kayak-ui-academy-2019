@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { resetMovie } from '../../actions/selectedMovie';
 import { toggleFavorite as toggleFavoriteAction } from '../../actions/favorites';
 import MovieCard from './movie-card';
 
@@ -9,7 +10,8 @@ const mapStateToProps = ({ lists: { isLoading }, favorites: { movies }, selected
 });
 
 const mapDispatchToProps = {
-  toggleFavorite: toggleFavoriteAction
+  toggleFavorite: toggleFavoriteAction,
+  resetMovie
 };
 
 export default connect(

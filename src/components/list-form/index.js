@@ -78,7 +78,7 @@ const ListForm = ({ history, submitForm, list, isLoading, id }) => {
                 id="description"
                 value={description}
                 onChange={handleChange}
-                resize="none"
+                rows="3"
               />
             </label>
           </div>

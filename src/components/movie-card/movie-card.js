@@ -5,8 +5,15 @@ import MovieLists from '../movie-lists';
 import Spinner from '../spinner';
 import { imagePath } from '../../services/movieDB';
 
-const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, isLoading }) => {
+const MovieCard = ({ selectedMovie, resetMovie, toggleFavorite, isFavorite, isLoading }) => {
   const [showListForm, setShowListForm] = useState(false);
+
+  useEffect(
+    () => () => {
+      resetMovie();
+    },
+    []
+  );
 
   useEffect(() => {
     if (showListForm) {
@@ -41,24 +48,25 @@ const MovieCard = ({ selectedMovie, toggleFavorite, isFavorite, isLoading }) => 
             <em>Description: </em>
             {selectedMovie.overview}
           </div>
-          <div className="clearfix mt-4 mb-3">
-            <button
-              type="button"
-              className="button float-left"
-              onClick={() => toggleFavorite(selectedMovie)}
-            >
-              {isFavorite ? 'Remove from favorites!' : 'Add to favorites!'}
-            </button>
-            <button
-              type="button"
-              className="button float-right"
-              onClick={() => setShowListForm(!showListForm)}
-            >
-              {showListForm ? 'Close' : 'Add to list'}
-            </button>
+          <div className="container mt-4">
+            <div className="row justify-content-between">
+              <button
+                type="button"
+                className="button mb-3"
+                onClick={() => toggleFavorite(selectedMovie)}
+              >
+                {isFavorite ? 'Remove from favorites!' : 'Add to favorites!'}
+              </button>
+              <button
+                type="button"
+                className="button mb-3"
+                onClick={() => setShowListForm(!showListForm)}
+              >
+                {showListForm ? 'Close' : 'Add to list'}
+              </button>
+            </div>
           </div>
-          {showListForm && <ListSelect />}
-          {!showListForm && <MovieLists />}
+          {showListForm ? <ListSelect /> : <MovieLists />}
         </div>
       </article>
     </div>
@@ -76,7 +84,8 @@ MovieCard.propTypes = {
   }).isRequired,
   toggleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  resetMovie: PropTypes.func.isRequired
 };
 
 export default MovieCard;

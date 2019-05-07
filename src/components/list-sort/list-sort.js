@@ -29,7 +29,7 @@ const options = [
 ];
 
 const ListSort = ({ setSort }) => (
-  <div className="form-group w-50 mb-3 float-left">
+  <div className="form-group d-inline-block mb-3">
     <label htmlFor="list-sort">
       <span className="mr-1">Sort by:</span>
       <select

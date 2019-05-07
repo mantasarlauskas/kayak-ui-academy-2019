@@ -13,11 +13,15 @@
   html,
   body {
     margin: 0;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   * {
     box-sizing: border-box;
+  }
+
+  textarea {
+    resize: none;
   }
 
   #app {

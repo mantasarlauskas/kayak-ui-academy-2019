@@ -11,7 +11,7 @@ const ListMovies = ({ currentList, id, resetSort }) => {
       {paginatedData => (
         <div className="row justify-content-center">
           {paginatedData.map(item => (
-            <div className="col-4" key={item.id}>
+            <div className="col-md-4 col-sm-12" key={item.id}>
               <ListCard {...item} listId={id} />
             </div>
           ))}

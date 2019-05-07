@@ -34,7 +34,7 @@ const Pagination = ({ itemsPerPage, data, children }) => {
   return (
     <Fragment>
       {children(paginatedData)}
-      <nav className="clearfix mb-5">
+      <nav className="clearfix mt-2 mb-5">
         <ul className="pagination float-right">
           <li className="page-item">
             <button type="button" className="page-link" onClick={() => handlePageChange(page - 1)}>

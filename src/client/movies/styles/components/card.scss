@@ -23,7 +23,7 @@ $width__child-unit-card: 350px;
     }
 
     &__body {
-      flex: 1 0 $width__child-unit-card;
+      flex: 1 1 $width__child-unit-card;
       @include card-child-base();
     }
   }
