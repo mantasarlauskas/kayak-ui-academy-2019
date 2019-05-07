@@ -22,14 +22,14 @@ const ListCard = ({
       <img className="card-img-top" src={`${imagePath}${poster_path}`} alt={title} />
       <div className="card-body">
         <h4 className="card-title">{title}</h4>
-        <p>
+        <div className="mb-2">
           <strong>{`Rating: ${vote_average}`}</strong>
-        </p>
-        <p>
-          <em>{` Date: ${release_date}`}</em>
-        </p>
-        <p>{comment ? `Comment: ${comment}` : 'No comments yet'}</p>
-        <p className={styles.cardText}>{overview}</p>
+        </div>
+        <div className="mb-2">
+          <em>{`Date: ${release_date}`}</em>
+        </div>
+        <div className="mb-2">{comment ? `Comment: ${comment}` : 'No comments yet'}</div>
+        <p className={styles.text}>{overview}</p>
         <div className="clearfix">
           <button
             type="button"

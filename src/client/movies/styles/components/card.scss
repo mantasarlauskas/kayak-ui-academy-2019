@@ -1,5 +1,5 @@
 $padding__unit-card: $size__gutter;
-$width__child-unit-card: 250px;
+$width__child-unit-card: 350px;
 
 @mixin card-child-base() {
   padding: 0 $padding__unit-card;
@@ -18,7 +18,7 @@ $width__child-unit-card: 250px;
     }
 
     &__thumbnail {
-      flex: 0 0 $width__child-unit-card;
+      flex: 1 1 300px;
       @include card-child-base();
     }
 
@@ -30,6 +30,8 @@ $width__child-unit-card: 250px;
 
   // Dependencies
   .asset-poster {
+    display: block;
+    margin: 0 auto;
     width: 250px;
     max-width: 100%;
   }

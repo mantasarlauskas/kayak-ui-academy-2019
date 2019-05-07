@@ -34,6 +34,7 @@
     "consistent-return": "off",
     "prefer-destructuring": "off",
     "no-nested-ternary": "off",
-    "camelcase": "warn"
+    "camelcase": "off",
+    "jsx-a11y/label-has-for": "off"
   }
 }

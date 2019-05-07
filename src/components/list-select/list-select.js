@@ -16,22 +16,25 @@ const ListSelect = ({ lists, addMovie, selectedMovieId }) => {
   };
 
   return lists.length > 0 ? (
-    <form onSubmit={handleSubmit}>
+    <form className="clearfix" onSubmit={handleSubmit}>
       <div className="form-group">
-        <select
-          className="form-control mt-3"
-          id="list-select"
-          value={list}
-          onChange={({ target: { value } }) => setList(parseInt(value, 10))}
-        >
-          {lists.map(({ name, id }) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
-        </select>
+        <label className="w-100" htmlFor="list-select">
+          Select list:
+          <select
+            className="form-control mt-3"
+            id="list-select"
+            value={list}
+            onChange={({ target: { value } }) => setList(parseInt(value, 10))}
+          >
+            {lists.map(({ name, id }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
-      <button type="submit" className="button mt-3">
+      <button type="submit" className="button float-right mt-3">
         Submit
       </button>
     </form>

@@ -46,7 +46,7 @@ const Lists = ({ lists, isLoading, removeList }) => (
         </table>
       </Fragment>
     ) : (
-      <div className="alert alert-warning mt-3">There are no lists yet</div>
+      <div className="alert alert-warning mt-3">No lists have been added yet</div>
     )}
   </div>
 );

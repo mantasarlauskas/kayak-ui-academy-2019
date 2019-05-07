@@ -10,8 +10,8 @@ import Lists from '../lists';
 import AddListForm from '../add-list-form';
 import EditListForm from '../edit-list-form';
 import List from '../list';
-import '../../client/movies/index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../client/movies/index.scss';
 
 const App = ({ setLists }) => {
   useEffect(() => {

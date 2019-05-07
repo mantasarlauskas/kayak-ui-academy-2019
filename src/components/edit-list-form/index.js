@@ -3,15 +3,16 @@ import { editList } from '../../actions/lists';
 import ListForm from '../list-form';
 
 const mapStateToProps = (
-  { lists },
+  { lists: { array, isLoading } },
   {
     match: {
       params: { id }
     }
   }
 ) => ({
-  lists,
-  id: parseInt(id, 10)
+  list: array.find(({ id: listId }) => listId === parseInt(id, 10)),
+  id: parseInt(id, 10),
+  isLoading
 });
 
 const mapDispatchToProps = {

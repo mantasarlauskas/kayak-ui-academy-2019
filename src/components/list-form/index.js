@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import Spinner from '../spinner';
 import styles from './list-form.scss';
 
-const ListForm = ({ history, submitForm, lists, id }) => {
+const ListForm = ({ history, submitForm, list, isLoading, id }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (lists && lists.array.length > 0) {
-      const list = lists.array.find(({ id: listId }) => listId === parseInt(id, 10));
-      if (list) {
-        setName(list.name);
-        setDescription(list.description);
-      }
+    if (list) {
+      setName(list.name);
+      setDescription(list.description);
     }
-  }, [lists]);
+  }, [list]);
 
   const validateForm = () => {
     if (name === '' || description === '') {
@@ -49,12 +46,12 @@ const ListForm = ({ history, submitForm, lists, id }) => {
 
   return (
     <div className="container">
-      {lists && lists.isLoading ? (
+      {isLoading ? (
         <Spinner />
-      ) : lists && (!name && !description) ? (
+      ) : id && (!name && !description) ? (
         <div className="alert alert-danger mt-3 text-centered">This list does not exist</div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form className="clearfix" onSubmit={handleSubmit}>
           <h3 className="text-centered mt-3">List form</h3>
           {error && (
             <div className="text-centered alert alert-danger mt-3">All fields must be filled</div>
@@ -85,7 +82,7 @@ const ListForm = ({ history, submitForm, lists, id }) => {
               />
             </label>
           </div>
-          <button type="submit" className={`btn btn-primary ${styles.submitButton}`}>
+          <button type="submit" className={`btn btn-primary ${styles.submit} float-right`}>
             Submit
           </button>
         </form>
@@ -99,22 +96,19 @@ ListForm.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  lists: PropTypes.shape({
-    array: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired
-      })
-    ),
-    isLoading: PropTypes.bool.isRequired
+  list: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
   }),
+  isLoading: PropTypes.bool,
   id: PropTypes.number
 };
 
 ListForm.defaultProps = {
   id: null,
-  lists: null
+  list: null,
+  isLoading: false
 };
 
 export default ListForm;

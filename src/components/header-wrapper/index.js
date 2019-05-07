@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Navbar from '../navbar';
 
 const HeaderWrapper = ({ children }) => (
   <header className="page-header">
+    <Navbar />
     <div className="container">
       <div className="content-wrapper">
         <div className="search">

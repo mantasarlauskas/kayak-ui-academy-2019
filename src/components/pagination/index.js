@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const Pagination = ({ itemsPerPage, data, Component, additionalProps }) => {
+const Pagination = ({ itemsPerPage, data, children }) => {
   const [page, setPage] = useState(0);
   const [paginatedData, setPaginatedData] = useState([]);
   const pageCount = Math.ceil(data.length / itemsPerPage);
@@ -33,13 +33,7 @@ const Pagination = ({ itemsPerPage, data, Component, additionalProps }) => {
 
   return (
     <Fragment>
-      <div className="row justify-content-center">
-        {paginatedData.map(item => (
-          <div className="col-4" key={item.id}>
-            <Component {...item} {...additionalProps} />
-          </div>
-        ))}
-      </div>
+      {children(paginatedData)}
       <nav className="clearfix mb-5">
         <ul className="pagination float-right">
           <li className="page-item">
@@ -62,12 +56,7 @@ const Pagination = ({ itemsPerPage, data, Component, additionalProps }) => {
 Pagination.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   data: PropTypes.array.isRequired,
-  Component: PropTypes.elementType.isRequired,
-  additionalProps: PropTypes.object
-};
-
-Pagination.defaultProps = {
-  additionalProps: {}
+  children: PropTypes.func.isRequired
 };
 
 export default Pagination;
