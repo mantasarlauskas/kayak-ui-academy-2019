@@ -23,7 +23,7 @@ const Autocomplete = ({ setMovies, setGenres }) => {
           <i className="control__icon fas fa-film" />
           <input
             className="input"
-            onChange={e => setInputValue(e.target.value)}
+            onChange={({ target: { value } }) => setInputValue(value)}
             onFocus={setIsOpen}
             value={inputValue}
             id="movies-autocomplete"

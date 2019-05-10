@@ -27,8 +27,8 @@ const Lists = ({ lists, isLoading, removeList }) => (
             <tbody>
               {lists.map(({ id, name }, index) => (
                 <tr key={id}>
-                  <td>{index + 1}</td>
-                  <td>
+                  <td className="align-middle">{index + 1}</td>
+                  <td className="align-middle">
                     <Link to={`/list/${id}`}>{`${name}`}</Link>
                   </td>
                   <td>
@@ -52,7 +52,7 @@ const Lists = ({ lists, isLoading, removeList }) => (
         </div>
       </Fragment>
     ) : (
-      <div className="alert alert-warning mt-3">No lists have been added yet</div>
+      <div className="alert alert-warning mt-3 text-centered">No lists have been added yet</div>
     )}
   </div>
 );

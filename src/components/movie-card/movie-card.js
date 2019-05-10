@@ -5,15 +5,18 @@ import MovieLists from '../movie-lists';
 import Spinner from '../spinner';
 import { imagePath } from '../../services/movieDB';
 
-const MovieCard = ({ selectedMovie, resetMovie, toggleFavorite, isFavorite, isLoading }) => {
+const MovieCard = ({
+  selectedMovie,
+  resetMovie,
+  addFavorite,
+  removeFavorite,
+  user,
+  isFavorite,
+  isLoading
+}) => {
   const [showListForm, setShowListForm] = useState(false);
 
-  useEffect(
-    () => () => {
-      resetMovie();
-    },
-    []
-  );
+  useEffect(() => () => resetMovie(), []);
 
   useEffect(() => {
     if (showListForm) {
@@ -53,20 +56,24 @@ const MovieCard = ({ selectedMovie, resetMovie, toggleFavorite, isFavorite, isLo
               <button
                 type="button"
                 className="button mb-3"
-                onClick={() => toggleFavorite(selectedMovie)}
+                onClick={() =>
+                  isFavorite ? removeFavorite(selectedMovie) : addFavorite(selectedMovie)
+                }
               >
                 {isFavorite ? 'Remove from favorites!' : 'Add to favorites!'}
               </button>
-              <button
-                type="button"
-                className="button mb-3"
-                onClick={() => setShowListForm(!showListForm)}
-              >
-                {showListForm ? 'Close' : 'Add to list'}
-              </button>
+              {user && (
+                <button
+                  type="button"
+                  className="button mb-3"
+                  onClick={() => setShowListForm(!showListForm)}
+                >
+                  {showListForm ? 'Close' : 'Add to list'}
+                </button>
+              )}
             </div>
           </div>
-          {showListForm ? <ListSelect /> : <MovieLists />}
+          {user && (showListForm ? <ListSelect /> : <MovieLists />)}
         </div>
       </article>
     </div>
@@ -82,10 +89,19 @@ MovieCard.propTypes = {
     overview: PropTypes.string.isRequired,
     poster_path: PropTypes.string.isRequired
   }).isRequired,
-  toggleFavorite: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    access_token: PropTypes.string.isRequired,
+    account_id: PropTypes.string.isRequired
+  }),
+  addFavorite: PropTypes.func.isRequired,
+  removeFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   resetMovie: PropTypes.func.isRequired
+};
+
+MovieCard.defaultProps = {
+  user: null
 };
 
 export default MovieCard;

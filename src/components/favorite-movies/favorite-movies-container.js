@@ -1,16 +1,9 @@
 import { connect } from 'react-redux';
-import { setMovies as setMoviesAction } from '../../actions/favorites';
 import FavoriteMovies from './favorite-movies';
 
-const mapStateToProps = ({ favorites: { movies } }) => ({
-  movies
+const mapStateToProps = ({ favorites: { movies, isLoading } }) => ({
+  movies,
+  isLoading
 });
 
-const mapDispatchToProps = {
-  setMovies: setMoviesAction
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FavoriteMovies);
+export default connect(mapStateToProps)(FavoriteMovies);

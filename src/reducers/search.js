@@ -9,15 +9,9 @@ const initialState = {
 const search = (state = initialState, action) => {
   switch (action.type) {
     case GOT_GENRES: {
-      const genresMap = {};
-
-      action.genres.forEach(genre => {
-        genresMap[genre.id] = genre;
-      });
-
       return {
         ...state,
-        genres: genresMap
+        genres: action.genres.reduce((genres, genre) => ({ ...genres, [genre.id]: genre }), {})
       };
     }
     case GOT_MOVIES: {

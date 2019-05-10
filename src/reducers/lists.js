@@ -1,4 +1,4 @@
-import { GOT_LISTS, GET_LISTS, SET_SORT, RESET_SORT } from '../actions/lists';
+import { GOT_LISTS, GET_LISTS, SET_SORT, RESET_SORT, CLEAR_LISTS } from '../actions/lists';
 
 const initialState = {
   array: [],
@@ -29,6 +29,8 @@ export default (state = initialState, action) => {
         ...state,
         sortBy: initialState.sortBy
       };
+    case CLEAR_LISTS:
+      return initialState;
     default:
       return state;
   }
