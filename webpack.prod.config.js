@@ -50,6 +50,10 @@ const clientConfig = {
         ]
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
         test: /\.svg$/,
         exclude: /node_modules/,
         loader: 'svg-react-loader'
@@ -101,6 +105,10 @@ const serverConfig = {
           },
           'sass-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.svg$/,

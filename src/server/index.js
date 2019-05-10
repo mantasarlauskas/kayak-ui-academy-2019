@@ -1,9 +1,9 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import React from 'react';
-
 import express from 'express';
-
 import App from '../components/app';
+
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -27,4 +27,4 @@ app.get('*', (req, res) => {
     `);
 });
 
-app.listen(3000, () => console.log('Production server is running on!'));
+app.listen(port, () => console.log('Production server is running on!'));

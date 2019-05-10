@@ -1,6 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import reducer from '../reducers';
 import initStorageClient from './local-storage-client';
 
@@ -11,7 +10,7 @@ export default (initialState = {}) => {
     reducer,
     initialState,
     compose(
-      applyMiddleware(enhancedThunk, logger),
+      applyMiddleware(enhancedThunk),
       devMiddleware
     )
   );
