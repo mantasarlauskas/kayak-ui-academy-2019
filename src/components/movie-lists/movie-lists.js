@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Alert from '../alert';
 
 const MovieLists = ({ movieLists }) =>
   movieLists.length > 0 ? (
@@ -15,7 +16,7 @@ const MovieLists = ({ movieLists }) =>
       </ul>
     </Fragment>
   ) : (
-    <div className="alert alert-warning mt-3">This movie has not been added to a list yet</div>
+    <Alert type="warning">This movie has not been added to a list yet</Alert>
   );
 
 MovieLists.propTypes = {

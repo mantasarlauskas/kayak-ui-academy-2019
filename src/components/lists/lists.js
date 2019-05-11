@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../spinner';
+import Alert from '../alert';
 
 const Lists = ({ lists, isLoading, removeList }) => (
   <div className="container">
@@ -52,7 +53,7 @@ const Lists = ({ lists, isLoading, removeList }) => (
         </div>
       </Fragment>
     ) : (
-      <div className="alert alert-warning mt-3 text-centered">No lists have been added yet</div>
+      <Alert type="warning">No lists have been added yet</Alert>
     )}
   </div>
 );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../spinner';
+import Alert from '../alert';
 import styles from './list-form.scss';
 
 const ListForm = ({ history, submitForm, list, isLoading, id }) => {
@@ -49,13 +50,11 @@ const ListForm = ({ history, submitForm, list, isLoading, id }) => {
       {isLoading ? (
         <Spinner />
       ) : id && (!name && !description) ? (
-        <div className="alert alert-danger mt-3 text-centered">This list does not exist</div>
+        <Alert type="danger">This list does not exist</Alert>
       ) : (
         <form className="clearfix" onSubmit={handleSubmit}>
           <h3 className="text-centered mt-3">List form</h3>
-          {error && (
-            <div className="text-centered alert alert-danger mt-3">All fields must be filled</div>
-          )}
+          {error && <Alert type="danger">All fields must be filled</Alert>}
           <div className="form-group">
             <label className="w-100" htmlFor="name">
               Title
