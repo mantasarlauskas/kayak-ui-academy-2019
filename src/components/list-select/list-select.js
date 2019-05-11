@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Alert from '../alert';
 
 const ListSelect = ({ lists, addMovie, selectedMovieId }) => {
   const [list, setList] = useState('');
@@ -39,9 +40,7 @@ const ListSelect = ({ lists, addMovie, selectedMovieId }) => {
       </button>
     </form>
   ) : (
-    <div className="alert alert-danger text-centered mt-3">
-      There are no lists available for this movie to be added to
-    </div>
+    <Alert type="danger">There are no lists available for this movie to be added to</Alert>
   );
 };
 

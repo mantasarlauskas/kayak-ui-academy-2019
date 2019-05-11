@@ -26,13 +26,7 @@ const App = ({ setLists, setMovies, user, checkUser, isLoading }) => {
   }, [user]);
 
   return isLoading ? (
-    <div className="container">
-      <div className="row h-100 align-items-center">
-        <div className="col-12">
-          <Spinner />
-        </div>
-      </div>
-    </div>
+    <Spinner />
   ) : (
     <div className="page-wrapper">
       <HeaderWrapper>

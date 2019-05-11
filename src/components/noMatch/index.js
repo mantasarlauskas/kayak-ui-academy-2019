@@ -1,8 +1,9 @@
 import React from 'react';
+import Alert from '../alert';
 
 const NoMatch = () => (
   <div className="page-content container">
-    <div className="alert alert-danger text-centered mt-3">This route does not exist</div>
+    <Alert type="danger">This route does not exist</Alert>
   </div>
 );
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Alert from '../alert';
 
 const CommentForm = ({ initialComment, addMovieComment, movieId, listId }) => {
   const [comment, setComment] = useState('');
@@ -22,7 +23,7 @@ const CommentForm = ({ initialComment, addMovieComment, movieId, listId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <div className="alert alert-danger mt-3">Field must not be empty</div>}
+      {error && <Alert type="danger">Field must not be empty</Alert>}
       <div className="form-group mt-3">
         <label className="w-100" htmlFor="comment">
           Comment
