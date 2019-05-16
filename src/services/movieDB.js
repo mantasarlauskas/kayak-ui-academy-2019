@@ -20,7 +20,7 @@ export const getRequestToken = async () => {
     data: { request_token }
   } = await axios.post(
     `${urlV4}/auth/request_token`,
-    { redirect_to: 'http://localhost:3000/' },
+    { redirect_to: 'https://moviedb-movies.herokuapp.com/' },
     getConfig(readAccessToken)
   );
   return request_token;
