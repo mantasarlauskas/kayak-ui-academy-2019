@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const moviesMemo = {};
-const apiKey = '309d013fc2c6056e01770285c01bd2a1';
-const urlV4 = 'https://api.themoviedb.org/4';
-const urlV3 = 'https://api.themoviedb.org/3';
-const readAccessToken =
+
+export const apiKey = '309d013fc2c6056e01770285c01bd2a1';
+export const urlV4 = 'https://api.themoviedb.org/4';
+export const urlV3 = 'https://api.themoviedb.org/3';
+export const imagePath = 'https://image.tmdb.org/t/p/w500';
+export const readAccessToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDlkMDEzZmMyYzYwNTZlMDE3NzAyODVjMDFiZDJhMSIsInN1YiI6IjVjYzc1MmEyYzNhMzY4MjBiNTg2NjRkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yXdXgp6XChvqW9fyRq2HDcAaDznEHZWBJNstp7-Gm7I';
 
-export const imagePath = 'https://image.tmdb.org/t/p/w500';
-
-const getConfig = token => ({
+export const getConfig = token => ({
   headers: {
     Authorization: `Bearer ${token}`
   }

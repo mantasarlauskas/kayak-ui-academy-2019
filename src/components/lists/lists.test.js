@@ -299,7 +299,7 @@ describe('Lists component: ', () => {
     ).toEqual(true);
   });
 
-  it('should render the same amount of rows as there are lists', () => {
+  it('should render all lists in table rows', () => {
     expect(wrapper.find('tbody tr').length).toEqual(initialState.lists.array.length);
   });
 });

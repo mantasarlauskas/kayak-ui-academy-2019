@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import Alert from '../alert';
 import MovieLists from './movie-lists-container';
 
-describe('Lists component: ', () => {
+describe('Movie lists component: ', () => {
   let wrapper;
   const mockStore = configureStore([]);
   const initialState = {
