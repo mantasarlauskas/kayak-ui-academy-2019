@@ -59,9 +59,6 @@ const Lists = ({ lists, isLoading, removeList }) => (
 );
 
 Lists.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
   lists: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

@@ -51,10 +51,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin('dist', {}),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
-    new CleanWebpackPlugin('dist', {}),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,

@@ -12,6 +12,8 @@ import EditListForm from '../edit-list-form';
 import List from '../list';
 import NoMatch from '../noMatch';
 import Spinner from '../spinner';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../client/movies/index.scss';
 
 const App = ({ setLists, setMovies, user, checkUser, isLoading }) => {
   useEffect(() => {
