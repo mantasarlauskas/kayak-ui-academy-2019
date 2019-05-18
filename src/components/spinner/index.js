@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => (
+const Spinner = () => (
   <div className="container">
     <div className="row h-100 align-items-center">
       <div className="col-12 text-centered mt-3">
@@ -12,3 +12,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default Spinner;
